@@ -1,9 +1,12 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Menu, X, Home, BookOpen, FileText, UtensilsCrossed, Users, Activity, 
   GraduationCap, MessageSquare, Building, Briefcase, MoreHorizontal, 
   User, Settings, HelpCircle } from 'lucide-react';
 import MTechCSEView from './MTechCSEView';
+import PhDCSEView from './PhDCSEView';
+import BTechCSEView from './BTechCSEView';
 
 const DISCIPLINES = [
   { name: 'Computer Science and Engineering', programs: ['M.Tech CSE', 'PhD in CSE', 'B.Tech CSE'] },
@@ -53,6 +56,10 @@ const App = () => {
   const handleProgramClick = (program) => {
     if (program === 'M.Tech CSE') {
       setCurrentView('mtech-cse');
+    } else if (program === 'PhD in CSE') {
+      setCurrentView('phd-cse');
+    } else if (program === 'B.Tech CSE') {
+      setCurrentView('btech-cse');
     }
   };
 
@@ -89,6 +96,7 @@ const App = () => {
       </aside>
 
       <main className="main-content">
+        <div className="navbar-placeholder"></div>
         {currentView === 'disciplines' ? (
           <>
             <header>
@@ -162,6 +170,10 @@ const App = () => {
           </>
         ) : currentView === 'mtech-cse' ? (
           <MTechCSEView onBack={handleBackToPrograms} />
+        ) : currentView === 'phd-cse' ? (
+          <PhDCSEView onBack={handleBackToPrograms} />
+        ) : currentView === 'btech-cse' ? (
+          <BTechCSEView onBack={handleBackToPrograms} />
         ) : null}
       </main>
     </div>
