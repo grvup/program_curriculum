@@ -1,4 +1,3 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Menu, X, Home, BookOpen, FileText, UtensilsCrossed, Users, Activity, 
@@ -7,6 +6,7 @@ import { Menu, X, Home, BookOpen, FileText, UtensilsCrossed, Users, Activity,
 import MTechCSEView from './MTechCSEView';
 import PhDCSEView from './PhDCSEView';
 import BTechCSEView from './BTechCSEView';
+import CourseProposalForm from './CourseProposalForm';  // Importing the new Course Proposal Form component
 
 const DISCIPLINES = [
   { name: 'Computer Science and Engineering', programs: ['M.Tech CSE', 'PhD in CSE', 'B.Tech CSE'] },
@@ -67,6 +67,10 @@ const App = () => {
     setCurrentView('disciplines');
   };
 
+  const handleCourseProposalClick = () => {
+    setCurrentView('course-proposal-form'); // Set view to course proposal form
+  };
+
   return (
     <div className="app">
       <aside className={`sidebar ${isSidebarOpen ? 'open' : 'closed'}`}>
@@ -91,6 +95,9 @@ const App = () => {
             <li><a href="#"><User size={20} /> {isSidebarOpen && 'Profile'}</a></li>
             <li><a href="#"><Settings size={20} /> {isSidebarOpen && 'Settings'}</a></li>
             <li><a href="#"><HelpCircle size={20} /> {isSidebarOpen && 'Help'}</a></li>
+
+            {/* Add the new Course Proposal item here */}
+            <li><a href="#" onClick={handleCourseProposalClick}><FileText size={20} /> {isSidebarOpen && 'Course Proposal'}</a></li>
           </ul>
         </nav>
       </aside>
@@ -120,7 +127,7 @@ const App = () => {
                 <li><a href="#">Courses</a></li>
                 <li className="active"><a href="#">Discipline</a></li>
                 <li><a href="#">Batches</a></li>
-                <li><a href="#">Course Proposal Form</a></li>
+                <li><a href="#" onClick={handleCourseProposalClick}>Course Proposal Form</a></li>
                 <li><a href="#">Course Proposal Tracking</a></li>
               </ul>
             </div>
@@ -158,7 +165,7 @@ const App = () => {
                             >
                               {program}
                             </a>
-                            {programIndex < getFilteredPrograms(discipline.programs).length - 1 && ' | '}
+                            {programIndex < discipline.programs.length - 1 && ' | '}
                           </React.Fragment>
                         ))}
                       </td>
@@ -174,6 +181,8 @@ const App = () => {
           <PhDCSEView onBack={handleBackToPrograms} />
         ) : currentView === 'btech-cse' ? (
           <BTechCSEView onBack={handleBackToPrograms} />
+        ) : currentView === 'course-proposal-form' ? (
+          <CourseProposalForm onBack={handleBackToPrograms} />
         ) : null}
       </main>
     </div>
