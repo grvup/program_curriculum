@@ -68,7 +68,11 @@ const App = () => {
   };
 
   const handleCourseProposalClick = () => {
-    setCurrentView('course-proposal-form');
+    setCurrentView('course-proposal-form'); // Set view to course proposal form
+  };
+
+  const handleNavClick = (view) => {
+    setCurrentView(view);
   };
 
   return (
@@ -80,7 +84,7 @@ const App = () => {
         </div>
         <nav className="sidebar-nav">
           <ul>
-            <li><a href="#"><Home size={20} /> {isSidebarOpen && 'Home'}</a></li>
+            <li><a href="#" onClick={() => handleNavClick('disciplines')}><Home size={20} /> {isSidebarOpen && 'Home'}</a></li>
             <li><a href="#"><BookOpen size={20} /> {isSidebarOpen && 'Academics'}</a></li>
             <li className="active"><a href="#"><FileText size={20} /> {isSidebarOpen && 'Program and Curriculum'}</a></li>
             <li><a href="#"><UtensilsCrossed size={20} /> {isSidebarOpen && 'Mess'}</a></li>
@@ -95,6 +99,7 @@ const App = () => {
             <li><a href="#"><User size={20} /> {isSidebarOpen && 'Profile'}</a></li>
             <li><a href="#"><Settings size={20} /> {isSidebarOpen && 'Settings'}</a></li>
             <li><a href="#"><HelpCircle size={20} /> {isSidebarOpen && 'Help'}</a></li>
+
             <li><a href="#" onClick={handleCourseProposalClick}><FileText size={20} /> {isSidebarOpen && 'Course Proposal'}</a></li>
           </ul>
         </nav>
@@ -121,9 +126,9 @@ const App = () => {
             <li><a href="#">Programmes</a></li>
             <li><a href="#">Curriculums</a></li>
             <li><a href="#">Courses</a></li>
-            <li className="active"><a href="#">Discipline</a></li>
+            <li className={currentView === 'disciplines' ? 'active' : ''}><a href="#" onClick={() => handleNavClick('disciplines')}>Discipline</a></li>
             <li><a href="#">Batches</a></li>
-            <li><a href="#" onClick={handleCourseProposalClick}>Course Proposal Form</a></li>
+            <li className={currentView === 'course-proposal-form' ? 'active' : ''}><a href="#" onClick={handleCourseProposalClick}>Course Proposal Form</a></li>
             <li><a href="#">Course Proposal Tracking</a></li>
           </ul>
         </div>
@@ -180,7 +185,7 @@ const App = () => {
         ) : currentView === 'btech-cse' ? (
           <BTechCSEView onBackToPrograms={handleBackToPrograms} />
         ) : currentView === 'course-proposal-form' ? (
-          <CourseProposalForm onBackToPrograms={handleBackToPrograms} />  // Pass back handler to Course Proposal Form
+          <CourseProposalForm />  
         ) : null}
       </main>
     </div>
