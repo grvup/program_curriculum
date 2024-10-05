@@ -6,7 +6,7 @@ import { Menu, X, Home, BookOpen, FileText, UtensilsCrossed, Users, Activity,
 import MTechCSEView from './MTechCSEView';
 import PhDCSEView from './PhDCSEView';
 import BTechCSEView from './BTechCSEView';
-import CourseProposalForm from './CourseProposalForm';  // Importing the new Course Proposal Form component
+import CourseProposalForm from './CourseProposalForm';
 
 const DISCIPLINES = [
   { name: 'Computer Science and Engineering', programs: ['M.Tech CSE', 'PhD in CSE', 'B.Tech CSE'] },
@@ -68,7 +68,7 @@ const App = () => {
   };
 
   const handleCourseProposalClick = () => {
-    setCurrentView('course-proposal-form'); // Set view to course proposal form
+    setCurrentView('course-proposal-form');
   };
 
   return (
@@ -95,8 +95,6 @@ const App = () => {
             <li><a href="#"><User size={20} /> {isSidebarOpen && 'Profile'}</a></li>
             <li><a href="#"><Settings size={20} /> {isSidebarOpen && 'Settings'}</a></li>
             <li><a href="#"><HelpCircle size={20} /> {isSidebarOpen && 'Help'}</a></li>
-
-            {/* Add the new Course Proposal item here */}
             <li><a href="#" onClick={handleCourseProposalClick}><FileText size={20} /> {isSidebarOpen && 'Course Proposal'}</a></li>
           </ul>
         </nav>
@@ -104,34 +102,34 @@ const App = () => {
 
       <main className="main-content">
         <div className="navbar-placeholder"></div>
+        <header>
+          <div className="header-left">
+            <button className="toggle-sidebar" onClick={toggleSidebar}>
+              {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+            <h1>Program and Curriculum &gt; Discipline</h1>
+          </div>
+          <div className="header-right">
+            <a href="#" className="header-icon"><User size={20} /></a>
+            <a href="#" className="header-icon"><Settings size={20} /></a>
+            <a href="#" className="header-icon"><HelpCircle size={20} /></a>
+          </div>
+        </header>
+
+        <div className="top-nav">
+          <ul>
+            <li><a href="#">Programmes</a></li>
+            <li><a href="#">Curriculums</a></li>
+            <li><a href="#">Courses</a></li>
+            <li className="active"><a href="#">Discipline</a></li>
+            <li><a href="#">Batches</a></li>
+            <li><a href="#" onClick={handleCourseProposalClick}>Course Proposal Form</a></li>
+            <li><a href="#">Course Proposal Tracking</a></li>
+          </ul>
+        </div>
+
         {currentView === 'disciplines' ? (
           <>
-            <header>
-              <div className="header-left">
-                <button className="toggle-sidebar" onClick={toggleSidebar}>
-                  {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
-                <h1>Program and Curriculum &gt; Discipline</h1>
-              </div>
-              <div className="header-right">
-                <a href="#" className="header-icon"><User size={20} /></a>
-                <a href="#" className="header-icon"><Settings size={20} /></a>
-                <a href="#" className="header-icon"><HelpCircle size={20} /></a>
-              </div>
-            </header>
-
-            <div className="top-nav">
-              <ul>
-                <li><a href="#">Programmes</a></li>
-                <li><a href="#">Curriculums</a></li>
-                <li><a href="#">Courses</a></li>
-                <li className="active"><a href="#">Discipline</a></li>
-                <li><a href="#">Batches</a></li>
-                <li><a href="#" onClick={handleCourseProposalClick}>Course Proposal Form</a></li>
-                <li><a href="#">Course Proposal Tracking</a></li>
-              </ul>
-            </div>
-
             <div className="tabs">
               <button className={filter === 'ALL' ? 'active' : ''} onClick={() => setFilter('ALL')}>ALL</button>
               <button className={filter === 'B.Tech' ? 'active' : ''} onClick={() => setFilter('B.Tech')}>B.Tech</button>
@@ -176,13 +174,13 @@ const App = () => {
             </div>
           </>
         ) : currentView === 'mtech-cse' ? (
-          <MTechCSEView onBack={handleBackToPrograms} />
+          <MTechCSEView onBackToPrograms={handleBackToPrograms} />
         ) : currentView === 'phd-cse' ? (
-          <PhDCSEView onBack={handleBackToPrograms} />
+          <PhDCSEView onBackToPrograms={handleBackToPrograms} />
         ) : currentView === 'btech-cse' ? (
-          <BTechCSEView onBack={handleBackToPrograms} />
+          <BTechCSEView onBackToPrograms={handleBackToPrograms} />
         ) : currentView === 'course-proposal-form' ? (
-          <CourseProposalForm onBack={handleBackToPrograms} />
+          <CourseProposalForm onBackToPrograms={handleBackToPrograms} />  // Pass back handler to Course Proposal Form
         ) : null}
       </main>
     </div>
