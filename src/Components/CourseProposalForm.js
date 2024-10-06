@@ -171,7 +171,7 @@ const CourseProposalForm = () => {
                 </table>
               </div>
 
-              <button style={addButtonStyle}>ADD COURSE PROPOSAL FORM</button>
+              <button style={addButtonStyle} ><a href="/new">ADD COURSE PROPOSAL FORM</a></button>
             </>
           )}
 
@@ -215,7 +215,7 @@ const CourseProposalForm = () => {
                 </table>
               </div>
 
-              <button style={addButtonStyle}>ADD COURSE PROPOSAL FORM</button>
+              <button style={addButtonStyle}><a href="/new">ADD COURSE PROPOSAL FORM</a></button>
             </>
           )}
         </div>
